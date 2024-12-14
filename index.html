@@ -193,7 +193,7 @@
         <h2>Регистрация</h2>
         <form id="register-form">
             <div class="input-group">
-                <input type="text" id="new-username" name="username" placeholder="Логин" required>
+                <input type="text" id="new-username" name="username" placeholder="Ник" required>
             </div>
             <div class="input-group">
                 <input type="password" id="new-password" name="password" placeholder="Пароль" required>
@@ -212,7 +212,7 @@
         <h2>Вход</h2>
         <form id="login-form">
             <div class="input-group">
-                <input type="text" id="username" name="username" placeholder="Логин" required>
+                <input type="text" id="username" name="username" placeholder="Ник" required>
             </div>
             <div class="input-group">
                 <input type="password" id="password" name="password" placeholder="Пароль" required>
@@ -249,12 +249,12 @@
             const confirmPassword = document.getElementById('confirm-password').value;
 
             if (containsCyrillic(newUsername)) {
-                alert("Логин не может содержать русские буквы!");
+                alert("Ник не должен содержать русских букв!");
                 return;
             }
 
-            if (containsCyrillic(newPassword)) {
-                alert("Пароль не может содержать русские буквы!");
+            if (newPassword.length < 6) {
+                alert("Минимальное количество символов в пароле должно составлять 6!");
                 return;
             }
 
@@ -266,7 +266,7 @@
             const hashedPassword = hashPassword(newPassword);
             const userData = JSON.parse(localStorage.getItem('users')) || [];
             if (userData.some(u => u.username === newUsername)) {
-                alert("Пользователь с таким логином уже существует!");
+                alert("Пользователь с таким ником уже существует!");
                 return;
             }
             userData.push({ username: newUsername, password: hashedPassword });
@@ -285,7 +285,7 @@
                 alert("Вы успешно вошли!");
                 window.location.href = 'download.html';
             } else {
-                alert("Неверный логин или пароль!");
+                alert("Неверный ник или пароль!");
             }
         });
 
