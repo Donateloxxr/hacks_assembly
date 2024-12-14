@@ -248,6 +248,11 @@
             const newPassword = document.getElementById('new-password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
 
+            if (newUsername.length < 6) {
+                alert("Ник должен содержать минимум 6 символов!");
+                return;
+            }
+
             if (containsCyrillic(newUsername)) {
                 alert("Ник не должен содержать русских букв!");
                 return;
@@ -299,6 +304,5 @@
             document.getElementById('register-form-container').style.display = "block";
         }
     </script>
-
 </body>
 </html>
