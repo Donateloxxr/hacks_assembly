@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация и Вход</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #8bc34a, #1b5e20);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .form-container {
+            background-color: rgba(46, 59, 79, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1s ease-out forwards;
+            position: relative;
+        }
+
+        .form-container h2 {
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #fff;
+            font-weight: bold;
+            animation: slideIn 1s ease-out;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #3e4a59;
+            border-radius: 8px;
+            outline: none;
+            background-color: #3e4a59;
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .input-group input:focus {
+            border-color: #56ccf2;
+            background-color: #2a3747;
+        }
+
+        .show-password-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #56ccf2;
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .show-password-btn:hover {
+            color: #fff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #56ccf2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out forwards;
+        }
+
+        .submit-btn:hover {
+            background-color: #4ca8e1;
+        }
+
+        .toggle-link {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ccc;
+            animation: fadeInUp 2s ease-out forwards;
+        }
+
+        .toggle-link a {
+            text-decoration: none;
+            color: #56ccf2;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-link a:hover {
+            color: #4ca8e1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop class="background-video">
+        <source src="https://www.example.com/deer-drinking-water.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+
+    <div class="form-container" id="register-form-container">
+        <h2>Регистрация</h2>
+        <form id="register-form">
+            <div class="input-group">
+                <input type="text" id="new-username" name="username" placeholder="Логин" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="new-password" name="password" placeholder="Пароль" required>
+                <button type="button" class="show-password-btn" onclick="togglePasswordVisibility('new-password')">👁️</button>
+            </div>
+            <div class="input-group">
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Подтвердите пароль" required>
+                <button type="button" class="show-password-btn" onclick="togglePasswordVisibility('confirm-password')">👁️</button>
+            </div>
+            <button type="submit" class="submit-btn">Зарегистрироваться</button>
+        </form>
+        <p class="toggle-link">Уже зарегистрированы? <a href="javascript:void(0);" onclick="showLoginForm()">Войти</a></p>
+    </div>
+
+    <div class="form-container" id="login-form-container" style="display: none;">
+        <h2>Вход</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="Логин" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Пароль" required>
+                <button type="button" class="show-password-btn" onclick="togglePasswordVisibility('password')">👁️</button>
+            </div>
+            <button type="submit" class="submit-btn">Войти</button>
+        </form>
+        <p class="toggle-link">Еще нет аккаунта? <a href="javascript:void(0);" onclick="showRegisterForm()">Зарегистрироваться</a></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.js"></script>
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const passwordField = document.getElementById(inputId);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+
+        function hashPassword(password) {
+            return CryptoJS.SHA256(password).toString(CryptoJS.enc.Base64);
+        }
+
+        document.getElementById('register-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            if (newPassword !== confirmPassword) {
+                alert("Пароли не совпадают!");
+                return;
+            }
+            const hashedPassword = hashPassword(newPassword);
+            const userData = JSON.parse(localStorage.getItem('users')) || [];
+            if (userData.some(u => u.username === newUsername)) {
+                alert("Пользователь с таким логином уже существует!");
+                return;
+            }
+            userData.push({ username: newUsername, password: hashedPassword });
+            localStorage.setItem('users', JSON.stringify(userData));
+            alert("Регистрация успешна! Теперь можете войти.");
+            showLoginForm();
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const userData = JSON.parse(localStorage.getItem('users')) || [];
+            const user = userData.find(u => u.username === username && u.password === hashPassword(password));
+            if (user) {
+                alert("Вы успешно вошли!");
+                window.location.href = 'download.html';
+            } else {
+                alert("Неверный логин или пароль!");
+            }
+        });
+
+        function showLoginForm() {
+            document.getElementById('register-form-container').style.display = "none";
+            document.getElementById('login-form-container').style.display = "block";
+        }
+
+        function showRegisterForm() {
+            document.getElementById('login-form-container').style.display = "none";
+            document.getElementById('register-form-container').style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
