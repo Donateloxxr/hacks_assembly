@@ -3,248 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expensive 3.1 Crack</title>
+    <title>Регистрация и Вход</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: #1e2a35;
-            color: #fff;
+            background: linear-gradient(135deg, #8bc34a, #1b5e20);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding: 20px;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
-            overflow: auto;
+            color: #fff;
+            overflow: hidden;
             position: relative;
         }
 
-        .container {
-            width: 300px;
-            background-color: rgba(46, 59, 79, 0.9);
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .form-container {
+            background-color: rgba(46, 59, 79, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 30px;
             border-radius: 15px;
-            padding: 15px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin: 10px;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeIn 1s ease-out forwards;
+            position: relative;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
-        .image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .image:hover {
-            transform: scale(1.1);
-        }
-
-        .title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-align: center;
-            color: #f2f2f2;
-        }
-
-        .description {
-            width: 100%;
-            max-height: 100px;
-            overflow-y: auto;
-            padding: 10px;
-            background-color: #3e4a59;
-            border-radius: 15px;
-            font-size: 14px;
-            line-height: 1.5;
+        .form-container h2 {
+            margin-bottom: 30px;
+            font-size: 28px;
             color: #fff;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            scrollbar-width: thin;
-            scrollbar-color: #56ccf2 #3e4a59;
+            font-weight: bold;
+            animation: slideIn 1s ease-out;
         }
 
-        .description::-webkit-scrollbar {
-            width: 10px;
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+            animation: fadeInUp 1s ease-out forwards;
         }
 
-        .description::-webkit-scrollbar-thumb {
-            background-color: #56ccf2;
-            border-radius: 10px;
-        }
-
-        .description::-webkit-scrollbar-track {
-            background: #3e4a59;
-        }
-
-        .download-btn {
+        .input-group input {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #3e4a59;
+            border-radius: 8px;
+            outline: none;
+            background-color: #3e4a59;
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .input-group input:focus {
+            border-color: #56ccf2;
+            background-color: #2a3747;
+        }
+
+        .show-password-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #56ccf2;
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .show-password-btn:hover {
+            color: #fff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
             background-color: #56ccf2;
-            color: white;
+            color: #fff;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: background-color 0.3s ease-in-out;
-            margin-top: 15px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out forwards;
         }
 
-        .download-btn:hover {
+        .submit-btn:hover {
             background-color: #4ca8e1;
         }
 
-        .logout-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 15px;
-            background-color: #f44336;
-            color: white;
-            border: none;
-            border-radius: 8px;
+        .toggle-link {
+            margin-top: 20px;
             font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
+            color: #ccc;
+            animation: fadeInUp 2s ease-out forwards;
         }
 
-        .logout-btn:hover {
-            background-color: #e53935;
+        .toggle-link a {
+            text-decoration: none;
+            color: #56ccf2;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-link a:hover {
+            color: #4ca8e1;
         }
 
         @keyframes fadeIn {
-            0% {
+            from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(-30px);
             }
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .container:nth-child(1) {
-            animation-delay: 0s;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .container:nth-child(2) {
-            animation-delay: 0.5s;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
+        .download-section {
+            background-color: rgba(46, 59, 79, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #3e4a59;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
+            max-width: 600px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
         }
 
-        .modal-content p {
-            color: white;
+        .download-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
             margin-bottom: 20px;
         }
 
-        .modal-content button {
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
+        .download-section p {
+            color: #fff;
         }
 
-        .cancel-btn {
-            background-color: #f44336;
-            color: white;
+        .download-section a {
+            color: #56ccf2;
+            text-decoration: none;
         }
 
-        .confirm-btn {
-            background-color: #56ccf2;
-            color: white;
+        .download-section a:hover {
+            color: #4ca8e1;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <img src="https://i.imgur.com/4bVZ3B8.png" alt="Expensive 3.1 Crack" class="image">
-            <h1 class="title">Expensive 3.1 Crack</h1>
-        </div>
-        <div class="description">
-            <p><strong>Описание:</strong><br><br>
-            После первого запуска Expensive во второй раз и последующие разы, просто так запустится не получится, в папке с конфигами создается cfg system, который крашит чит. Просто перед заходом удаляйте system.cfg и все будет нормально.<br><br>
-            Я знаю как это фиксится, чтобы данная проблема не возникала, но мне слишком лень опять лезть в сурсы этого чита и фиксить это.<br><br>
-            Конфигурации сохраняются в корневую папку Minecraft.<br><br>
-            Для запуска используйте TLegacy, 19 java и noverify в аргументах лаунчера.
-            </p>
-        </div>
-        <button class="download-btn" onclick="downloadFile()">Скачать файл</button>
+    <video autoplay muted loop class="background-video">
+        <source src="https://www.example.com/deer-drinking-water.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+
+    <div class="form-container" id="register-form-container">
+        <h2>Регистрация</h2>
+        <form id="register-form">
+            <div class="input-group">
+                <input type="text" id="new-username" name="username" placeholder="Ник" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="new-password" name="password" placeholder="Пароль" required>
+                <button type="button" class="show-password-btn" onclick="togglePasswordVisibility('new-password')">👁️</button>
+            </div>
+            <div class="input-group">
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Подтвердите пароль" required>
+                <button type="button" class="show-password-btn" onclick="togglePasswordVisibility('confirm-password')">👁️</button>
+            </div>
+            <button type="submit" class="submit-btn">Зарегистрироваться</button>
+        </form>
+        <p class="toggle-link">Уже зарегистрированы? <a href="javascript:void(0);" onclick="showLoginForm()">Войти</a></p>
     </div>
 
-    <div class="logout-btn" onclick="showLogoutModal()">Выйти</div>
-
-    <div class="modal" id="logoutModal">
-        <div class="modal-content">
-            <p>Вы действительно хотите выйти?</p>
-            <button class="confirm-btn" onclick="logout()">Да</button>
-            <button class="cancel-btn" onclick="closeLogoutModal()">Нет</button>
-        </div>
+    <div class="form-container" id="login-form-container" style="display: none;">
+        <h2>Вход</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="Ник" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Пароль" required>
+                <button type="button" class="show-password-btn" onclick="togglePasswordVisibility('password')">👁️</button>
+            </div>
+            <button type="submit" class="submit-btn">Войти</button>
+        </form>
+        <p class="toggle-link">Еще нет аккаунта? <a href="javascript:void(0);" onclick="showRegisterForm()">Зарегистрироваться</a></p>
     </div>
 
+    <div class="download-section">
+        <img src="https://imgur.com/OBBdRmI" alt="Celestial 1.16.5">
+        <p>1. Скачиваем архив</p>
+        <p>2. Разархивировать архив</p>
+        <p>3. Заходим в папку calestial и запускаем файл start.bat</p>
+        <p>p.s; чтобы загрузить кфг нужно перекинуть конфиги в C:\Celestial\configs</p>
+        <a href="https://workupload.com/start/d46qRZxkpW2" target="_blank">Скачать файл</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.js"></script>
     <script>
-        function downloadFile() {
-            window.location.href = "https://workupload.com/file/QkQcwL2SvPa";
-        }
-
-        function showLogoutModal() {
-            document.getElementById("logoutModal").style.display = "flex";
-        }
-
-        function closeLogoutModal() {
-            document.getElementById("logoutModal").style.display = "none";
-        }
-
-        function logout() {
-            localStorage.removeItem("user");
-            alert("Вы вышли из аккаунта");
-            window.location.href = "login.html";
-        }
-
-        window.onclick = function(event) {
-            if (event.target === document.getElementById("logoutModal")) {
-                closeLogoutModal();
+        function togglePasswordVisibility(inputId) {
+            const passwordField = document.getElementById(inputId);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
             }
         }
-    </script>
 
+        function hashPassword(password) {
+            return CryptoJS.SHA256(password).toString(CryptoJS.enc.Base64);
+        }
+
+        function containsCyrillic(str) {
+            return /[А-Яа-яЁё]/.test(str);
+        }
+
+        document.getElementById('register-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (newUsername.length < 6) {
+                alert("Ник должен содержать минимум 6 символов!");
+                return;
+            }
+
+            if (containsCyrillic(newUsername)) {
+                alert("Ник не должен содержать русских букв!");
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                alert("Минимальное количество символов в пароле должно составлять 6!");
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert("Пароли не совпадают!");
+                return;
+            }
+
+            const hashedPassword = hashPassword(newPassword);
+            const userData = JSON.parse(localStorage.getItem('users')) || [];
+            if (userData.some(u => u.username === newUsername)) {
+                alert("Пользователь с таким ником уже существует!");
+                return;
+            }
+            userData.push({ username: newUsername, password: hashedPassword });
+            localStorage.setItem('users', JSON.stringify(userData));
+            alert("Регистрация успешна! Теперь можете войти.");
+            showLoginForm();
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const userData = JSON.parse(localStorage.getItem('users')) || [];
+            const user = userData.find(u => u.username === username && u.password === hashPassword(password));
+            if (user) {
+                alert("Вы успешно вошли!");
+                window.location.href = 'download.html';
+            } else {
+                alert("Неверный ник или пароль!");
+            }
+        });
+
+        function showLoginForm() {
+            document.getElementById('register-form-container').style.display = "none";
+            document.getElementById('login-form-container').style.display = "block";
+        }
+
+        function showRegisterForm() {
+            document.getElementById('login-form-container').style.display = "none";
+            document.getElementById('register-form-container').style.display = "block";
+        }
+    </script>
 </body>
 </html>
