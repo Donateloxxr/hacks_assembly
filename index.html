@@ -238,15 +238,31 @@
             return CryptoJS.SHA256(password).toString(CryptoJS.enc.Base64);
         }
 
+        function containsCyrillic(str) {
+            return /[А-Яа-яЁё]/.test(str);
+        }
+
         document.getElementById('register-form').addEventListener('submit', function (event) {
             event.preventDefault();
             const newUsername = document.getElementById('new-username').value;
             const newPassword = document.getElementById('new-password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (containsCyrillic(newUsername)) {
+                alert("Логин не может содержать русские буквы!");
+                return;
+            }
+
+            if (containsCyrillic(newPassword)) {
+                alert("Пароль не может содержать русские буквы!");
+                return;
+            }
+
             if (newPassword !== confirmPassword) {
                 alert("Пароли не совпадают!");
                 return;
             }
+
             const hashedPassword = hashPassword(newPassword);
             const userData = JSON.parse(localStorage.getItem('users')) || [];
             if (userData.some(u => u.username === newUsername)) {
