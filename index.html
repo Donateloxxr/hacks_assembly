@@ -180,6 +180,21 @@
             }
         }
 
+        .logout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
     </style>
 </head>
 <body>
@@ -221,6 +236,11 @@
             <button type="submit" class="submit-btn">Войти</button>
         </form>
         <p class="toggle-link">Еще нет аккаунта? <a href="javascript:void(0);" onclick="showRegisterForm()">Зарегистрироваться</a></p>
+    </div>
+
+    <div id="download-page" style="display: none;">
+        <h2>Добро пожаловать!</h2>
+        <button class="logout-btn" onclick="logout()">Выйти</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.js"></script>
@@ -276,7 +296,7 @@
             }
             userData.push({ username: newUsername, password: hashedPassword });
             localStorage.setItem('users', JSON.stringify(userData));
-            alert("Регистрация успешна! Теперь можете войти.");
+            alert("Регистрация успешна! Перенаправляем на страницу входа.");
             showLoginForm();
         });
 
@@ -288,7 +308,8 @@
             const user = userData.find(u => u.username === username && u.password === hashPassword(password));
             if (user) {
                 alert("Вы успешно вошли!");
-                window.location.href = 'download.html';
+                localStorage.setItem("loggedInUser", username);
+                showDownloadPage();
             } else {
                 alert("Неверный ник или пароль!");
             }
@@ -303,6 +324,28 @@
             document.getElementById('login-form-container').style.display = "none";
             document.getElementById('register-form-container').style.display = "block";
         }
+
+        function showDownloadPage() {
+            document.getElementById('register-form-container').style.display = "none";
+            document.getElementById('login-form-container').style.display = "none";
+            document.getElementById('download-page').style.display = "block";
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = location.href;
+        }
+
+        function checkLoginStatus() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            if (loggedInUser) {
+                showDownloadPage();
+            } else {
+                showRegisterForm();
+            }
+        }
+
+        window.onload = checkLoginStatus;
     </script>
 </body>
 </html>
